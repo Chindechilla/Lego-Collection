@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Set - <%= set.name %></title>
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+    <%- include('partials/navbar', { page: '' }) %>
+
+    <div class="container mx-auto p-4">
+
+        <h1 class="text-3xl font-bold mb-4">Edit Set - <%= set.name %></h1>
+
+        <form action="/lego/editSet" method="POST">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="<%= set.name %>" required>
+            </div>
+            <div>
+                <label for="year">Year:</label>
+                <input type="number" id="year" name="year" value="<%= set.year %>" required>
+            </div>
+            <div>
+                <label for="num_parts">Number of Parts:</label>
+                <input type="number" id="num_parts" name="num_parts" value="<%= set.num_parts %>" required>
+            </div>
+            <div>
+                <label for="img_url">Image URL:</label>
+                <input type="url" id="img_url" name="img_url" value="<%= set.img_url %>" required>
+            </div>
+            <div>
+                <label for="theme_id">Theme:</label>
+                <select id="theme_id" name="theme_id" required>
+                    <% themes.forEach(theme => { %>
+                    <option <%= (set.theme_id == theme.id) ? "selected" : "" %> value="<%= theme.id %>">
+                        <%= theme.name %>
+                    </option>
+                    <% }) %>
+                </select>
+            </div>
+            <div>
+                <label for="set_num">Set Number:</label>
+                <input type="text" id="set_num" name="set_num" value="<%= set.set_num %>" readonly
+                    class="cursor-not-allowed">
+            </div>
+            <div>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Update Set
+                </button>
+            </div>
+        </form>
+
+        <form action="/lego/deleteSet/<%= set.set_num %>" method="GET">
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Delete Set
+            </button>
+        </form>
+    </div>
+</body>
+
+</html>
