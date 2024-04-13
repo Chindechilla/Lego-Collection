@@ -16,6 +16,7 @@ function initialize() {
       const db = mongoose.createConnection(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
   
       db.on('error', err => {
+        console.error(err);
         reject(err);
       });
   
