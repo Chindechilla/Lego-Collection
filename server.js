@@ -193,9 +193,6 @@ app.use((req, res, next) => {
 Promise.all([authData.initialize(), legoData.initialize()])
   .then(() => {
     console.log('All promise has been resolved!');
-    app.listen(HTTP_PORT, () => {
-      console.log(`Server is running on port ${HTTP_PORT}`);
-    });
   })
   .catch((err) => {
     console.error("Unable to start the server:", err);
@@ -212,4 +209,8 @@ app.use(
 app.use((req, res, next) => {
   res.locals.session = req.session;
   next();
+});
+
+app.listen(HTTP_PORT, () => {
+  console.log(`Server is running on port ${HTTP_PORT}`);
 });
