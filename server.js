@@ -21,7 +21,7 @@ const clientSessions = require('client-sessions');
 const express = require('express');
 const app = express();
 const uri = "mongodb+srv://vutrinh0423:trinh250600@chindechilla.fbyeaf5.mongodb.net/?retryWrites=true&w=majority&appName=Chindechilla"
-const HTTP_PORT = process.env.PORT || 8080;
+const HTTP_PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
