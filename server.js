@@ -190,6 +190,7 @@ app.use((req, res, next) => {
       message: "I'm sorry, we're unable to find what you're looking for",
     });
 });
+
 async function startServer() {
   try {
     await authData.initialize();
@@ -217,3 +218,4 @@ app.use((req, res, next) => {
   next();
 });
 
+/* phai req session va session?. */

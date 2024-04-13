@@ -25,6 +25,10 @@ function initialize() {
 }
 
   function registerUser(userData) {
+        // Ensure that User is defined before proceeding
+        if (!User) {
+            throw new Error("User model is not initialized. Call initialize() before using registerUser()");
+        }    
     return new Promise((resolve, reject) => {
         // Check if passwords match
         if (userData.password !== userData.password2) {
