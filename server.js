@@ -177,7 +177,7 @@ app.get("/lego/sets", async (req, res) => {
 app.get("/lego/sets/:num", async (req, res) => {
   try {
     let set = await legoData.getSetByNum(req.params.num);
-    res.render("set", { set });
+    res.render("set", { set, session: req.session });
   } catch (err) {
     res.status(404).render("404", { message: err });
   }
@@ -190,17 +190,20 @@ app.use((req, res, next) => {
       message: "I'm sorry, we're unable to find what you're looking for",
     });
 });
-Promise.all([authData.initialize(), legoData.initialize()])
-  .then(() => {
+async function startServer() {
+  try {
+    await authData.initialize();
+    await legoData.initialize();
+    console.log('All promises have been resolved!');
     app.listen(HTTP_PORT, () => {
       console.log(`Server is running on port ${HTTP_PORT}`);
     });
-    console.log('All promise has been resolved!');
-  })
-  .catch((err) => {
+  } catch (err) {
     console.error("Unable to start the server:", err);
-  });
+  }
+}
 
+startServer();
 app.use(
   clientSessions({
     cookieName: "session",

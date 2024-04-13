@@ -10,21 +10,17 @@ const userSchema = new mongoose.Schema({
 });
 
 let User;
-async function initialize() {
+function initialize() {
     console.log("Connecting to mongo");
-    return new Promise((resolve, reject) => {
-      const db = mongoose.createConnection(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    const db = mongoose.createConnection(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
   
-      db.on('error', err => {
+    db.on('error', err => {
         console.error(err);
-        reject(err);
-      });
-  
-      db.once('open', () => {
+    });
+
+    db.once('open', () => {
         console.log('auth-service mongo connected');
         User = db.model('User', userSchema);
-        resolve();
-      });
     });
 }
 
