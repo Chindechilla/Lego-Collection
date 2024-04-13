@@ -20,8 +20,7 @@ const bcrypt = require("bcryptjs");
 const clientSessions = require("client-sessions");
 const express = require("express");
 const app = express();
-const uri =
-  "mongodb+srv://vutrinh0423:trinh250600@chindechilla.fbyeaf5.mongodb.net/?retryWrites=true&w=majority&appName=Chindechilla";
+
 const HTTP_PORT = process.env.PORT || 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -196,8 +195,9 @@ app.use((req, res, next) => {
 });
 Promise.all([authData.initialize(), legoData.initialize()])
   .then(() => {
+    console.log('All promise has been resolved!');
     mongoose
-      .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+      .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
       .then(() => {
         console.log("MongoDB connected...");
         app.listen(HTTP_PORT, () => {
