@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User History</title>
+</head>
+<body>
+    <h1>User History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Login Date/Time</th>
+                <th>Client Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% session.user.loginHistory.forEach(function(history) { %>
+                <tr>
+                    <td><%= history.dateTime %></td>
+                    <td><%= history.userAgent %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>
