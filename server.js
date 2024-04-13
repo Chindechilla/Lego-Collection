@@ -12,11 +12,8 @@
  *
  ********************************************************************************/
 const legoData = require("./modules/legoSets");
-const path = require("path");
-const mongoose = require("mongoose");
 const authData = require("./modules/auth-service");
 
-const bcrypt = require("bcryptjs");
 const clientSessions = require("client-sessions");
 const express = require("express");
 const app = express();
@@ -196,15 +193,9 @@ app.use((req, res, next) => {
 Promise.all([authData.initialize(), legoData.initialize()])
   .then(() => {
     console.log('All promise has been resolved!');
-    mongoose
-      .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-      .then(() => {
-        console.log("MongoDB connected...");
-        app.listen(HTTP_PORT, () => {
-          console.log(`Server is running on port ${HTTP_PORT}`);
-        });
-      })
-      .catch((err) => console.error("MongoDB connection error:", err));
+    app.listen(HTTP_PORT, () => {
+      console.log(`Server is running on port ${HTTP_PORT}`);
+    });
   })
   .catch((err) => {
     console.error("Unable to start the server:", err);
