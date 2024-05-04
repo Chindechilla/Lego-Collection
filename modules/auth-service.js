@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
 let User;
 function initialize() {
     console.log("Connecting to mongo");
-    const db = mongoose.createConnection(process.env.MONGODB_URI);
+    const db = mongoose.createConnection(process.env.MONGODB_URI); /*{ useNewUrlParser: true, useUnifiedTopology: true}*/
   
     db.on('error', err => {
         console.error(err);
