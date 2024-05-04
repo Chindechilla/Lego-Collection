@@ -1,16 +1,4 @@
-/********************************************************************************
- * WEB322 – Assignment 06
- *
- * I declare that this assignment is my own work in accordance with Seneca's
- * Academic Integrity Policy:
- *
- * https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
- *
- * Name: ___Thi Kieu Trinh Vu_________ Student ID: ___122630221___________ Date: __22nd March 2024____________
- *
- * Published URL: https://lego-collection-vert.vercel.app/
- * 
- ********************************************************************************/
+
 const legoData = require("./modules/legoSets");
 const authData = require("./modules/auth-service");
 
