@@ -1,10 +1,9 @@
 require('dotenv').config();
 const Sequelize = require('sequelize');
-import pg from 'pg';
 const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASSWORD, {
   host: process.env.DB_HOST,
   dialect: 'postgres',
-  dialectModule: pg,
+  dialectModule: require('pg'),
   dialectOptions: {
     ssl: {
       require: true,
