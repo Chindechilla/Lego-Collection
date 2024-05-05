@@ -21,9 +21,8 @@ app.use(
     activeDuration: 1000 * 60 * 5, // 5 minutes
   })
 );
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
 app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs");
 app.get("/", (req, res) => {
