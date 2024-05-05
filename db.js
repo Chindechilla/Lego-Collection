@@ -6,7 +6,7 @@ const pool = new Pool({
   host: process.env.DB_HOST,
   database: process.env.DB_DATABASE,
   password: process.env.DB_PASSWORD,
-  port: 5432, // Default PostgreSQL port
+  port: 5433, // Default PostgreSQL port
 });
 
 // Export a query method that any part of the application can use to execute SQL queries
