@@ -7,6 +7,16 @@ const express = require("express");
 const app = express();
 
 const HTTP_PORT = process.env.PORT || 8080;
+
+app.use(
+  clientSessions({
+    cookieName: "session",
+    secret: "your_secret_string",
+    duration: 24 * 60 * 60 * 1000, // 24 hours
+    activeDuration: 1000 * 60 * 5, // 5 minutes
+  })
+);
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -56,7 +66,7 @@ app.post("/login", async (req, res) => {
       email: user.email,
       loginHistory: user.loginHistory,
     };
-    res.redirect("/lego/sets");
+    res.redirect("/");
   } catch (err) {
     res.render("login", { errorMessage: err, userName: req.body.userName });
   }
@@ -193,14 +203,7 @@ async function startServer() {
 }
 
 startServer();
-app.use(
-  clientSessions({
-    cookieName: "session",
-    secret: "your_secret_string",
-    duration: 24 * 60 * 60 * 1000, // 24 hours
-    activeDuration: 1000 * 60 * 5, // 5 minutes
-  })
-);
+
 app.use((req, res, next) => {
   res.locals.session = req.session;
   next();
