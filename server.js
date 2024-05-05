@@ -1,12 +1,17 @@
 require('dotenv').config();
 const legoData = require("./modules/legoSets");
 const authData = require("./modules/auth-service");
+const path = require('path');
 
 const clientSessions = require("client-sessions");
 const express = require("express");
 const app = express();
 
 const HTTP_PORT = process.env.PORT || 8080;
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+});
 
 app.use(
   clientSessions({
@@ -205,9 +210,5 @@ async function startServer() {
 
 startServer();
 
-app.use((req, res, next) => {
-  res.locals.session = req.session;
-  next();
-});
 
 /* phai req session va session?. */
