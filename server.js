@@ -1,4 +1,4 @@
-
+require('dotenv').config();
 const legoData = require("./modules/legoSets");
 const authData = require("./modules/auth-service");
 
